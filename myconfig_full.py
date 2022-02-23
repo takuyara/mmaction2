@@ -4,10 +4,9 @@ _base_ = [
 
 # dataset settings
 dataset_type = 'VideoDataset'
-data_root = 'D:\\working-age-data\\videos'
-data_root_val = 'D:\\working-age-data\\videos'
-ann_file_train = './total_annotation.txt'
-ann_file_val = './total_annotation.txt'
+data_root = data_root_val = 'D:\\working-age-data\\videos'
+ann_file_train = './train_annotation.txt'
+ann_file_val = './val_annotation.txt'
 # ann_file_test = 'data/sthv1/sthv1_val_list_rawframes.txt'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_bgr=False)
