@@ -6,6 +6,8 @@ import os.path as osp
 import time
 import warnings
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 import mmcv
 import torch
 from mmcv import Config, DictAction
