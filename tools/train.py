@@ -5,8 +5,10 @@ import os
 import os.path as osp
 import time
 import warnings
+import platform
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+if platform.system() == "Windows":
+    os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 import mmcv
 import torch

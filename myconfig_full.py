@@ -2,9 +2,13 @@ _base_ = [
     'myconfig.py', 'configs/_base_/default_runtime.py'
 ]
 
+import platform
+
+base_data_root = 'D:\\working-age-data\\videos' if platform.system() == "Windows" else "/rds/user/yl847/hpc-work/outlast/"
+
 # dataset settings
 dataset_type = 'VideoDataset'
-data_root = data_root_val = 'D:\\working-age-data\\videos'
+data_root = data_root_val = base_data_root
 ann_file_train = './train_annotation.txt'
 ann_file_val = './val_annotation.txt'
 # ann_file_test = 'data/sthv1/sthv1_val_list_rawframes.txt'
