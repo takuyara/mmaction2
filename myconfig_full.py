@@ -2,9 +2,7 @@ _base_ = [
     'myconfig.py', 'configs/_base_/default_runtime.py'
 ]
 
-import platform
-
-base_data_root = 'D:\\working-age-data\\videos' if platform.system() == "Windows" else "/rds/user/yl847/hpc-work/outlast/"
+base_data_root = "/rds/user/yl847/hpc-work/outlast/"
 
 # dataset settings
 dataset_type = 'VideoDataset'
@@ -79,7 +77,7 @@ evaluation = dict(
     interval=5, metrics=['top_k_accuracy', 'mean_class_accuracy'])
 
 # optimizer
-optimizer = dict(type='Adam', lr=0.001, weight_decay=0.0005)
+optimizer = dict(type='Adam', lr=0.001)
 optimizer_config = dict(grad_clip=dict(max_norm=20, norm_type=2))
 # learning policy
 lr_config = dict(policy='step', step=[75, 125])
