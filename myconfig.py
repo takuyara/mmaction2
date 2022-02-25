@@ -2,6 +2,8 @@ _base_ = ['configs/_base_/default_runtime.py']
 
 # model settings
 num_classes = 4
+clip_size = 32
+
 model = dict(
     type='Recognizer2D',
     backbone=dict(
@@ -17,7 +19,7 @@ model = dict(
         out_channels=1024,
         spatial_modulation_cfg=dict(
             in_channels=(1024, 2048), out_channels=2048),
-        temporal_modulation_cfg=dict(downsample_scales=(16, 16)),
+        temporal_modulation_cfg=dict(downsample_scales=(clip_size, clip_size)),
         upsample_cfg=dict(scale_factor=(1, 1, 1)),
         downsample_cfg=dict(downsample_scale=(1, 1, 1)),
         level_fusion_cfg=dict(
@@ -54,7 +56,7 @@ img_norm_cfg = dict(
     mean=[86.067436, 92.065525, 121.146114], std=[54.645994, 53.534381, 58.450872], to_bgr=False)
 train_pipeline = [
     dict(type="DecordInit"),
-    dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=16),
+    dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=clip_size),
     dict(type='DecordDecode'),
     dict(type='RandomResizedCrop'),
     dict(type='Resize', scale=(224, 224), keep_ratio=False),
@@ -101,7 +103,7 @@ evaluation = dict(
     interval=5, metrics=['top_k_accuracy', 'mean_class_accuracy'])
 
 # optimizer
-optimizer = dict(type = 'Adam', lr = 0.008, betas = (0.9, 0.999), weight_decay = 0.0001)
+optimizer = dict(type = 'Adam', lr = 0.002, betas = (0.9, 0.999), weight_decay = 0.0001)
 optimizer_config = dict(grad_clip=dict(max_norm=20, norm_type=2))
 # learning policy
 lr_config = dict(policy='step', step=[140])
