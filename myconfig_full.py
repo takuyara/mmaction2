@@ -41,25 +41,9 @@ val_pipeline = [
     dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
     dict(type='ToTensor', keys=['imgs'])
 ]
-test_pipeline = [
-    dict(
-        type='SampleFrames',
-        clip_len=1,
-        frame_interval=1,
-        num_clips=8,
-        twice_sample=True,
-        test_mode=True),
-    dict(type='RawFrameDecode'),
-    dict(type='Resize', scale=(-1, 256)),
-    dict(type='ThreeCrop', crop_size=256),
-    dict(type='Normalize', **img_norm_cfg),
-    dict(type='FormatShape', input_format='NCHW'),
-    dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
-    dict(type='ToTensor', keys=['imgs'])
-]
 data = dict(
-    videos_per_gpu=8,
-    workers_per_gpu=8,
+    videos_per_gpu=1,
+    workers_per_gpu=1,
     test_dataloader=dict(videos_per_gpu=1),
     train=dict(
         type=dataset_type,
@@ -77,13 +61,15 @@ evaluation = dict(
     interval=5, metrics=['top_k_accuracy', 'mean_class_accuracy'])
 
 # optimizer
-optimizer = dict(type='Adam', lr=0.001)
+optimizer = dict(type = 'Adam', lr = 0.008, beta = (0.9, 0.999), weight_decay = 0.0001)
 optimizer_config = dict(grad_clip=dict(max_norm=20, norm_type=2))
 # learning policy
-lr_config = dict(policy='step', step=[75, 125])
+lr_config = dict(policy='step', step=[140])
 total_epochs = 150
 
 batch_size = 128
+
+workflow = [("train", 1), ("val", 1)]
 
 # runtime settings
 work_dir = './work_dirs/tpn_tsm_r50_1x1x8_150e_kinetics400_rgb'
