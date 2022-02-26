@@ -43,9 +43,9 @@ model = dict(
 )
 
 
-# base_data_root = "/rds/user/yl847/hpc-work/outlast/"
+base_data_root = "/rds/user/yl847/hpc-work/outlast/"
 
-base_data_root = "D:\\working-age-data\\videos"
+# base_data_root = "D:\\working-age-data\\videos"
 
 # dataset settings
 dataset_type = 'VideoDataset'
