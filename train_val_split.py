@@ -6,7 +6,8 @@ def main():
 	val_data = []
 	for row in rows:
 		if row.find("DB") != -1 or row.find("DS") != -1 or row.find("DE02") != -1 or row.find("DH02") != -1:
-			continue
+			if len(sys.argv) > 2 and sys.argv[2] == "--no_d":
+				continue
 		if row.startswith(sys.argv[1]):
 			val_data.append(row)
 		else:

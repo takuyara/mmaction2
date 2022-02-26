@@ -8,11 +8,12 @@ model = dict(
     type='Recognizer2D',
     backbone=dict(
         type='ResNetTSM',
-        pretrained='torchvision://resnet50',
+        pretrained='FER_ResNet50.pt',
         depth=50,
         out_indices=(2, 3),
         norm_eval=False,
-        shift_div=8),
+        shift_div=8,
+        frozen_stages = 4),
     neck=dict(
         type='TPN',
         in_channels=(1024, 2048),
@@ -42,9 +43,9 @@ model = dict(
 )
 
 
-base_data_root = "/rds/user/yl847/hpc-work/outlast/"
+# base_data_root = "/rds/user/yl847/hpc-work/outlast/"
 
-# base_data_root = "D:\\working-age-data\\videos"
+base_data_root = "D:\\working-age-data\\videos"
 
 # dataset settings
 dataset_type = 'VideoDataset'

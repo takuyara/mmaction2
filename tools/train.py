@@ -153,18 +153,16 @@ def main():
     env_info_dict = collect_env()
     env_info = '\n'.join([f'{k}: {v}' for k, v in env_info_dict.items()])
     dash_line = '-' * 60 + '\n'
-    logger.info('Environment info:\n' + dash_line + env_info + '\n' +
-                dash_line)
+    #logger.info('Environment info:\n' + dash_line + env_info + '\n' + dash_line)
     meta['env_info'] = env_info
 
     # log some basic info
-    logger.info(f'Distributed training: {distributed}')
-    logger.info(f'Config: {cfg.pretty_text}')
+    # logger.info(f'Distributed training: {distributed}')
+    # logger.info(f'Config: {cfg.pretty_text}')
 
     # set random seeds
     seed = init_random_seed(args.seed, distributed=distributed)
-    logger.info(f'Set random seed to {seed}, '
-                f'deterministic: {args.deterministic}')
+    logger.info(f'Set random seed to {seed}, ' f'deterministic: {args.deterministic}')
     set_random_seed(seed, deterministic=args.deterministic)
 
     cfg.seed = seed
@@ -176,6 +174,8 @@ def main():
         cfg.model,
         train_cfg=cfg.get('train_cfg'),
         test_cfg=cfg.get('test_cfg'))
+
+    print(model)
 
     if len(cfg.module_hooks) > 0:
         register_module_hooks(model, cfg.module_hooks)

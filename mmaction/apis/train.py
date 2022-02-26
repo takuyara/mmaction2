@@ -153,6 +153,7 @@ def train_model(model,
     else:
         optimizer_config = cfg.optimizer_config
 
+
     # register hooks
     runner.register_training_hooks(cfg.lr_config, optimizer_config,
                                    cfg.checkpoint_config, cfg.log_config,
@@ -162,6 +163,7 @@ def train_model(model,
             runner.register_hook(OmniSourceDistSamplerSeedHook())
         else:
             runner.register_hook(DistSamplerSeedHook())
+
 
     # precise bn setting
     if cfg.get('precise_bn', False):
@@ -204,6 +206,8 @@ def train_model(model,
     runner_kwargs = dict()
     if cfg.omnisource:
         runner_kwargs = dict(train_ratio=train_ratio)
+
+
     runner.run(data_loaders, cfg.workflow, cfg.total_epochs, **runner_kwargs)
 
     if distributed:

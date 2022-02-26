@@ -41,13 +41,16 @@ for dataset in datasets:
 			task_path = os.path.join(os.path.join(dataset_path, subject), task)
 			if not os.path.exists(task_path):
 				continue
-			new_frame_path = os.path.join(new_path_subj, f"{task}.mp4")
 			video_label_path = os.path.join(os.path.join(os.path.join(label_path, dataset + "_csvs"), "SAM"), f"{subject}.csv")
 			if not os.path.exists(video_label_path):
 				continue
 			label = get_label(video_label_path, task)
-			annotation_file.write(f"{dataset}/{subject}/{task}.mp4 {label}\n")
-			total_labels[label] += 1
+			for i in range(50):
+				new_frame_path = os.path.join(new_path_subj, f"{task}_{i}.mp4")
+				if not os.path.exists(new_frame_path):
+					break
+				annotation_file.write(f"{dataset}/{subject}/{task}_{i}.mp4 {label}\n")
+				total_labels[label] += 1
 annotation_file.close()
 
 print(total_labels)
