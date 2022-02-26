@@ -116,7 +116,6 @@ def build_dataloader(dataset,
 
     data_loader = DataLoader(
         dataset,
-        batch_size=batch_size,
         sampler=sampler,
         num_workers=num_workers,
         collate_fn=partial(collate, samples_per_gpu=videos_per_gpu),

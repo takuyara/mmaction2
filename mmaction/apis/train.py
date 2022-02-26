@@ -89,6 +89,7 @@ def train_model(model,
         videos_per_gpu=cfg.data.get('videos_per_gpu', 1),
         workers_per_gpu=cfg.data.get('workers_per_gpu', 1),
         persistent_workers=cfg.data.get('persistent_workers', False),
+        batch_size = cfg.get("batch_size", 1),
         num_gpus=len(cfg.gpu_ids),
         dist=distributed,
         seed=cfg.seed)
@@ -172,6 +173,7 @@ def train_model(model,
             videos_per_gpu=cfg.data.get('videos_per_gpu', 1),
             workers_per_gpu=1,  # save memory and time
             persistent_workers=cfg.data.get('persistent_workers', False),
+            batch_size = cfg.get("batch_size", 1),
             num_gpus=len(cfg.gpu_ids),
             dist=distributed,
             seed=cfg.seed)
@@ -189,6 +191,7 @@ def train_model(model,
             workers_per_gpu=cfg.data.get('workers_per_gpu', 1),
             persistent_workers=cfg.data.get('persistent_workers', False),
             # cfg.gpus will be ignored if distributed
+            batch_size = cfg.get("batch_size", 1),
             num_gpus=len(cfg.gpu_ids),
             dist=distributed,
             shuffle=False)
@@ -206,7 +209,6 @@ def train_model(model,
     runner_kwargs = dict()
     if cfg.omnisource:
         runner_kwargs = dict(train_ratio=train_ratio)
-
 
     runner.run(data_loaders, cfg.workflow, cfg.total_epochs, **runner_kwargs)
 
