@@ -1,7 +1,7 @@
 _base_ = ['configs/_base_/default_runtime.py']
 
 # model settings
-num_classes = 4
+num_classes = 2
 clip_size = 32
 frame_interval = 5
 

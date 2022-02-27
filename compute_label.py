@@ -20,11 +20,15 @@ def get_label(path, task):
 			if len(total_labels) == 2:
 				break
 	label = 0
+	"""
 	if total_labels[0] <= 5:
 		label += 2
 	if total_labels[1] <= 5:
 		label += 1
 	assert 0 <= label and label <= 3
+	"""
+	if total_labels[0] <= 5:
+		label = 1
 	return label
 tvs = []
 tas = []
