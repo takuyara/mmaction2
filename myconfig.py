@@ -104,3 +104,5 @@ workflow = [("train", 1), ("val", 1)]
 
 # runtime settings
 work_dir = './work_dirs/tpn_tsm_r50_1x1x8_150e_kinetics400_rgb'
+
+gpu_ids = ["0"]
