@@ -1,14 +1,11 @@
 import sys
 def main():
-	with open("total_annotation.txt") as f:
+	with open(f"ann_all_{sys.argv[1]}.txt") as f:
 		rows = f.readlines()
 	train_data = []
 	val_data = []
 	for row in rows:
-		if row.find("DB") != -1 or row.find("DS") != -1 or row.find("DE02") != -1 or row.find("DH02") != -1:
-			if len(sys.argv) > 2 and sys.argv[2] == "--no_d":
-				continue
-		if row.startswith(sys.argv[1]):
+		if row.startswith(sys.argv[2]):
 			val_data.append(row)
 		else:
 			train_data.append(row)
